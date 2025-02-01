@@ -206,7 +206,6 @@ export default function Profile() {
             const reader = new FileReader();
             reader.onloadend = () => {
                 if (reader.result) {
-                    console.log(reader.result)
                     resolve(reader.result as string);
                 } 
                 else {
@@ -252,6 +251,7 @@ export default function Profile() {
         const inputData: any = generatePdf.current
         const pdf = new jsPDF("p", "in", "a4");
         const canvas = await html2canvas(inputData)
+
         // Step 3: Add the captured canvas image to the PDF
         const imgData = canvas.toDataURL("image/png");
 
@@ -264,23 +264,6 @@ export default function Profile() {
 
         // Step 5: Save the PDF
         pdf.save("ID_card.pdf");
-        // try {
-        //     const canvas = await html2canvas(inputData)
-        //     const imgData = canvas.toDataURL("image/png");
-        //     const width = 116.84; // 3.5 inches in mm
-        //     const height = 129.5; // 2.5 inches in mm
-        //     const pdf = new jsPDF({
-        //         unit: 'mm', // Use mm for units
-        //     });
-        //     const scaleX = width / canvas.width;
-        //     const scaleY = height / canvas.height;
-
-        //     pdf.addImage(imgData, 'PNG', 10, 10, canvas.width * scaleX, canvas.height * scaleY)
-        //     pdf.save(`${idNo}.pdf`)
-
-        // } catch (error) {
-        //     console.error(error)
-        // }
     }  
 
     const handleChangeRegion = (e: any) => {
@@ -556,9 +539,8 @@ export default function Profile() {
                         p_mobile_no: mobileNo,
                         p_passwordhash: password,
                         p_ip_address: res.data.ip
-                    }).then((response) => {
+                    }).then(() => {
                         dispatch(setIsLoading(false))
-                        console.log(response)
                         router.push('/')
                     })
                 })

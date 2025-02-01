@@ -72,14 +72,12 @@ export default function Dashboard() {
             if(res.isConfirmed) {
                 dispatch(setIsLoading(true))
                 sessionStorage.setItem('logout', 'true')
-
                 axios.get('/api/read/ip').then(res => {
                     axios.post('/api/login', {
                         p_mobile_no: data.mobile_no,
                         p_passwordhash: data.passwordhash,
                         p_ip_address: res.data.ip
-                    }).then((response) => {
-                        console.log(response.data)
+                    }).then(() => {
                         dispatch(setIsLoading(false))
                         router.push('/')
                     })
@@ -95,14 +93,12 @@ export default function Dashboard() {
             p_referrer_id_no: data.id_no,
             p_referrer_name: ''
         }).then(response => {
-            console.log("direct:", response.data.data)
             setRefDirect(response.data.data)
             axios.post('/api/referral/indirect', {
                 p_filter: '0',
                 p_referrer_id_no: data.id_no,
                 p_referrer_name: ''
             }).then(resp => {
-                console.log("indirect:", resp.data.data)
                 setRefIndirect(resp.data.data)
                 setRefAll(response.data.data.concat(resp.data.data))
                 dispatch(setIsLoading(false))
@@ -256,11 +252,37 @@ export default function Dashboard() {
                     <Grid item>
                         <Box sx={{ my: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <Box sx={{ position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <Avatar
-                                alt={'user'}
-                                src={`data:image/jpeg;base64,${imageBase64}`}
-                                sx={{ width: widthSize.width < 440 ? 130 : widthSize.width < 520 ? 170 : 190, height: widthSize.width < 440 ? 130 : widthSize.width < 520 ? 170 : 190, background: imageBase64 ? 'none' : '#000',color: imageBase64 ? '#ebf3fa' : '#000' }}
-                            />
+                                {imageBase64 ?
+                                    <Avatar
+                                        alt={'user'}
+                                        src={`data:image/jpeg;base64,${imageBase64}`}
+                                        sx={{ 
+                                            width: widthSize.width < 380 ? 100 : 120,
+                                            height: widthSize.width < 380 ? 100 : 120,
+                                            left: -10
+                                        }}
+                                    />
+                                :
+                                    data.gender ?
+                                    <Avatar
+                                        alt={'user'}
+                                        src={data.gender === 'Male' ? Images.male.src : Images.female.src}
+                                        sx={{ 
+                                            width: 120,
+                                            height: 120,
+                                            left: -10
+                                        }}
+                                    /> :
+                                    <Avatar
+                                        alt={'user'}
+                                        src={''}
+                                        sx={{ 
+                                            width: 120,
+                                            height: 120,
+                                            left: -10
+                                        }}
+                                    />
+                                }
                             </Box>
                             <Image src={Images.logo107} alt="logo 107" style={{ width: '100%', height: 'auto', zIndex: 1 }} />
                         </Box>
