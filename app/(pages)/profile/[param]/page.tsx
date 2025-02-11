@@ -1198,10 +1198,10 @@ export default function Profile() {
                                 </Grid>
                                 <Grid container display='row' justifyContent='space-between' alignItems='center' spacing={2}>
                                     <Grid item xs={12} sm={12} md={12} lg={3}>
-                                        <Typography>Precint No.</Typography>
+                                        <Typography>Precinct No.</Typography>
                                         <TextField 
                                             sx={{ mb: 2, background: '#fff' }} 
-                                            id="precint" 
+                                            id="precinct" 
                                             required 
                                             fullWidth
                                             disabled={disabled ? true : false}

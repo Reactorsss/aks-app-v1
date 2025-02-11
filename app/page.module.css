@@ -98,7 +98,7 @@
 }
 
 .backgroundReg {
-    background-image: url('../public/assets/register/image2.jpg');
+    background-image: url('/assets/register/image2.jpg');
     background-size: cover;
     background-position: bottom;
     width: 100%;

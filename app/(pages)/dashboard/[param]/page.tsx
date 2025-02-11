@@ -253,13 +253,22 @@ export default function Dashboard() {
                         <Box sx={{ my: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <Box sx={{ position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 {imageBase64 ?
+                                    // <Image 
+                                    //     src={`data:image/jpeg;base64,${imageBase64}`}
+                                    //     style={{ 
+                                    //         width: widthSize.width < 380 ? 100 : 155,
+                                    //         height: widthSize.width < 380 ? 100 : 155,
+                                    //         left: -10
+                                    //     }}
+                                    //     alt="user"
+                                    // />
                                     <Avatar
                                         alt={'user'}
                                         src={`data:image/jpeg;base64,${imageBase64}`}
                                         sx={{ 
-                                            width: widthSize.width < 380 ? 100 : 120,
-                                            height: widthSize.width < 380 ? 100 : 120,
-                                            left: -10
+                                            width: widthSize.width < 380 ? 100 : 165,
+                                            height: widthSize.width < 380 ? 100 : 165,
+                                            left: widthSize.width < 380 ? -8 : -12
                                         }}
                                     />
                                 :
