@@ -3,13 +3,12 @@
 import Loading from "@/app/component/loading";
 import { setIsLoading } from "@/app/store/slice";
 import { RootState } from "@/app/store/store";
-import Decryption from "@/app/ts/descryption";
 import { Images } from "@/app/ts/images";
 import { useWindowSize } from "@/app/ts/size";
 import { Box, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -21,17 +20,18 @@ export default function Verification() {
     const params: any = pathName.split('/');
     const dispatch = useDispatch();
     const isLoading = useSelector((state: RootState) => state.data.isLoading);
-
+    const router = useRouter();
     const [data, setData] = useState<any>('')
     const [photo, setPhoto] = useState<any>('')
     const [hide, setHide] = useState<boolean>(true)
     const [group, setGroup] = useState<any>('')
 
     useEffect(() => {
+        console.log(params)
         dispatch(setIsLoading(true))
         if(params[2]) {
-            axios.post('/api/session', {
-                p_session_token: JSON.parse(Decryption(params[2]))
+            axios.post('/api/session/mobile', {
+                p_mobile_no: params[2]
             }).then((response) => {
                 setData(response.data.data[0])
                 if(response.data.data[0].id > 0) {
@@ -92,7 +92,7 @@ export default function Verification() {
                     dispatch(setIsLoading(false))
                     let timerInterval: any;
                     Swal.fire({
-                        title: "Session Expired!",
+                        title: "No data",
                         html: "Redirecting to home page...",
                         timer: 2000,
                         timerProgressBar: true,
@@ -105,7 +105,7 @@ export default function Verification() {
                     }).then((result) => {
                         if (result.dismiss === Swal.DismissReason.timer) {
                             sessionStorage.removeItem('agree')
-                            // router.push('/')
+                            router.push('/')
                         }
                     });
                 }
@@ -115,7 +115,7 @@ export default function Verification() {
             dispatch(setIsLoading(false))
             let timerInterval: any;
             Swal.fire({
-                title: "Session Expired!",
+                title: "Access Denied",
                 html: "Redirecting to home page...",
                 timer: 2000,
                 timerProgressBar: true,
@@ -128,7 +128,7 @@ export default function Verification() {
             }).then((result) => {
                 if (result.dismiss === Swal.DismissReason.timer) {
                     sessionStorage.removeItem('agree')
-                    // router.push('/')
+                    router.push('/')
                 }
             });
         }

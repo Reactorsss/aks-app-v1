@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .interFont {
     font-family: "Inter", serif !important;
 }
@@ -98,7 +104,7 @@
 }
 
 .backgroundReg {
-    background-image: url('/assets/register/image2.jpg');
+    background-image: url('/assets/register/image2.jpg') !important;
     background-size: cover;
     background-position: bottom;
     width: 100%;

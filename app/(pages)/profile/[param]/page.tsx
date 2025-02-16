@@ -1960,7 +1960,7 @@ export default function Profile() {
                             brgy={selectedBarangay}
                             city={selectedMunicipality}
                             birthdate={dayjs(birthDate).format('YYYY-MM-DD') === 'Invalid Date' ? '' : dayjs(birthDate).format('YYYY-MM-DD')}
-                            session={params[2]}
+                            session={mobileNo}
                         />
                     </Box>
                 </DialogContent>

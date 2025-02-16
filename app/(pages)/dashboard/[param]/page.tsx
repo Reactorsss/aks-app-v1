@@ -641,7 +641,7 @@ export default function Dashboard() {
                             brgy={data.barangay}
                             city={data.city_municipality}
                             birthdate={dayjs(data.birth_date).format('YYYY-MM-DD') === 'Invalid Date' ? '' : dayjs(data.birth_date).format('YYYY-MM-DD')}
-                            session={params[2]}
+                            session={data.mobile_no}
                         />
                     </Box>
                 </DialogContent>
