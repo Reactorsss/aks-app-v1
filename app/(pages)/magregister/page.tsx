@@ -654,7 +654,7 @@ export default function Register() {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                                    <Typography>Referrer&apos;s Name or Oganization</Typography>
+                                    <Typography>Referrer&apos;s Name or Organization</Typography>
                                     <TextField
                                         id="referrer"
                                         placeholder="Leave this blank if not applicable"
